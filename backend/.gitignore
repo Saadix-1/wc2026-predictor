@@ -1,0 +1,9 @@
+# ML model artifacts — regenerate locally with: python -m app.ml.train
+models/*.pkl
+models/*.joblib
+models/*.csv
+
+# Dataset — download from Kaggle (see README)
+data/results.csv
+data/goalscorers.csv
+data/shootouts.csv
