@@ -1,4 +1,4 @@
-# WC2026 Predictor 🏆 
+# WC2026 Predictor 🏆  
 
 > **AI-powered 2026 FIFA World Cup match prediction platform** — predicts match outcomes using XGBoost + Elo ratings, simulates the full tournament bracket with Monte Carlo simulations, and generates AI-written match narratives via GPT-4o-mini.
 
