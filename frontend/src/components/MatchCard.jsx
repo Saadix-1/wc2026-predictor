@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getFlag, pct, confidenceBadge } from '../utils/helpers'
+import { getFlag, pct } from '../utils/helpers'
 import { getAnalysis } from '../api/client'
 import AnalysisModal from './AnalysisModal'
 
@@ -30,7 +30,7 @@ export default function MatchCard({ match, completed = false }) {
   return (
     <>
       <div className="glass-card match-card fade-in" style={{ padding: '1.5rem' }}>
-        {/* Round badge */}
+        {/* Round + date */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
           <span className="badge badge-gray">{match.round}</span>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{match.date}</span>
@@ -54,16 +54,16 @@ export default function MatchCard({ match, completed = false }) {
             )}
           </div>
 
-          {/* VS / Score divider */}
+          {/* Score / VS divider */}
           <div style={{ textAlign: 'center' }}>
             {completed ? (
               <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '0.4rem 0.8rem' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginBottom: 2 }}>FINAL</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block', marginBottom: 2, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Final</span>
                 <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>{match.score_a} – {match.score_b}</span>
-                {match.penalty_winner && <span style={{ fontSize: '0.7rem', color: 'var(--gold)', display: 'block' }}>PEN</span>}
+                {match.penalty_winner && <span style={{ fontSize: '0.7rem', color: 'var(--gold)', display: 'block', textTransform: 'uppercase' }}>PEN</span>}
               </div>
             ) : (
-              <span style={{ color: 'var(--text-muted)', fontWeight: 700 }}>VS</span>
+              <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.85rem' }}>vs</span>
             )}
           </div>
 
@@ -103,14 +103,12 @@ export default function MatchCard({ match, completed = false }) {
           </div>
         )}
 
-        {/* Footer row */}
+        {/* Footer */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {completed ? (
-            <span className={`badge ${match.winner === match.team_a ? 'badge-green' : match.winner === match.team_b ? 'badge-red' : 'badge-gray'}`}>
-              🏆 {match.winner} wins
-            </span>
+            <span className="badge badge-gray">{match.winner} wins</span>
           ) : pred ? (
-            <span className={`badge ${confidenceBadge(pred.confidence)}`}>
+            <span className={`badge ${pred.confidence === 'high' ? 'badge-green' : pred.confidence === 'moderate' ? 'badge-gold' : 'badge-gray'}`}>
               {pred.confidence} confidence
             </span>
           ) : <span />}
@@ -118,7 +116,7 @@ export default function MatchCard({ match, completed = false }) {
           {!completed && (
             <button className="btn btn-secondary" style={{ padding: '0.4rem 0.9rem', fontSize: '0.8rem' }}
               onClick={handleAnalysis} disabled={loadingAnalysis}>
-              {loadingAnalysis ? <><div className="spinner" style={{width:14,height:14}} /> Analyzing…</> : '✨ AI Analysis'}
+              {loadingAnalysis ? <><div className="spinner" style={{width:14,height:14}} /> Analyzing…</> : 'AI Analysis'}
             </button>
           )}
         </div>

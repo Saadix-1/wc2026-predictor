@@ -43,7 +43,11 @@ export default function PredictPage() {
     finally { setLoadingAnalysis(false) }
   }
 
-  const selStyle = { background: 'var(--bg-secondary)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '0.7rem 1rem', fontSize: '0.95rem', width: '100%', cursor: 'pointer' }
+  const selStyle = {
+    background: 'var(--bg-secondary)', color: 'var(--text-primary)',
+    border: '1px solid var(--border)', borderRadius: 'var(--radius-md)',
+    padding: '0.7rem 1rem', fontSize: '0.95rem', width: '100%', cursor: 'pointer'
+  }
 
   return (
     <div className="page">
@@ -65,7 +69,7 @@ export default function PredictPage() {
                 </select>
               </div>
             </div>
-            <div style={{ textAlign: 'center', paddingBottom: 4, color: 'var(--text-muted)', fontWeight: 700 }}>VS</div>
+            <div style={{ textAlign: 'center', paddingBottom: 4, color: 'var(--text-muted)', fontWeight: 700 }}>vs</div>
             <div>
               <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team B</label>
               <div style={{ position: 'relative' }}>
@@ -84,8 +88,9 @@ export default function PredictPage() {
             </select>
           </div>
 
-          <button className="btn btn-primary" onClick={handlePredict} disabled={loading} style={{ width: '100%', padding: '0.85rem', fontSize: '1rem' }}>
-            {loading ? <><div className="spinner" style={{width:18,height:18}} /> Predicting…</> : '🔮 Predict Match'}
+          <button className="btn btn-primary" onClick={handlePredict} disabled={loading}
+            style={{ width: '100%', padding: '0.85rem', fontSize: '1rem' }}>
+            {loading ? <><div className="spinner" style={{width:18,height:18}} /> Predicting…</> : 'Predict Match'}
           </button>
         </div>
 
@@ -104,8 +109,8 @@ export default function PredictPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.75rem' }}>
               {[
                 { label: `${getFlag(result.team_a)} ${result.team_a}`, val: result.home_win_prob, cls: 'win' },
-                { label: '🤝 Draw',                                      val: result.draw_prob,     cls: 'draw' },
-                { label: `${getFlag(result.team_b)} ${result.team_b}`,  val: result.away_win_prob, cls: 'loss' },
+                { label: 'Draw',                                        val: result.draw_prob,     cls: 'draw' },
+                { label: `${getFlag(result.team_b)} ${result.team_b}`, val: result.away_win_prob, cls: 'loss' },
               ].map(({ label, val, cls }) => (
                 <div key={label}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: '0.85rem' }}>
@@ -133,7 +138,7 @@ export default function PredictPage() {
             </div>
 
             <button className="btn btn-secondary" onClick={handleAnalysis} disabled={loadingAnalysis} style={{ width: '100%' }}>
-              {loadingAnalysis ? <><div className="spinner" style={{width:16,height:16}} /> Generating…</> : '✨ Get AI Match Analysis'}
+              {loadingAnalysis ? <><div className="spinner" style={{width:16,height:16}} /> Generating…</> : 'Get AI Match Analysis'}
             </button>
           </div>
         )}

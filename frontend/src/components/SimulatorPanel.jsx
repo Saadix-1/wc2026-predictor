@@ -3,7 +3,6 @@ import { simulate } from '../api/client'
 import { getFlag, pct } from '../utils/helpers'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 
-const GOLD = '#f59e0b'
 const COLORS = ['#f59e0b','#fbbf24','#34d399','#60a5fa','#a78bfa','#f87171','#94a3b8']
 
 export default function SimulatorPanel() {
@@ -27,7 +26,11 @@ export default function SimulatorPanel() {
     ? Object.entries(results.championship_probabilities)
         .filter(([, p]) => p > 0)
         .slice(0, 16)
-        .map(([team, prob]) => ({ team: team.length > 10 ? team.slice(0,9)+'…' : team, fullName: team, prob: +(prob * 100).toFixed(1) }))
+        .map(([team, prob]) => ({
+          team: team.length > 10 ? team.slice(0,9)+'…' : team,
+          fullName: team,
+          prob: +(prob * 100).toFixed(1)
+        }))
     : []
 
   return (
@@ -36,21 +39,21 @@ export default function SimulatorPanel() {
       <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
         <div style={{ flex: 1, minWidth: 200 }}>
           <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-            Simulations
+            Number of Simulations
           </label>
           <select value={iterations} onChange={e => setIterations(+e.target.value)}
             style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: '0.5rem 0.8rem', fontSize: '0.9rem', width: '100%' }}>
-            <option value={1000}>1,000 (fast)</option>
-            <option value={10000}>10,000 (recommended)</option>
-            <option value={50000}>50,000 (precise)</option>
+            <option value={1000}>1,000 — fast</option>
+            <option value={10000}>10,000 — recommended</option>
+            <option value={50000}>50,000 — precise</option>
           </select>
         </div>
         <button className="btn btn-primary" onClick={handleSimulate} disabled={loading} style={{ marginTop: 22 }}>
-          {loading ? <><div className="spinner" style={{width:16,height:16}} /> Simulating…</> : '🎲 Run Simulation'}
+          {loading ? <><div className="spinner" style={{width:16,height:16}} /> Simulating…</> : 'Run Simulation'}
         </button>
       </div>
 
-      {/* Results */}
+      {/* Loading state */}
       {loading && (
         <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
           <div className="spinner" style={{ width: 40, height: 40, margin: '0 auto 1rem', borderWidth: 3 }} />
@@ -58,6 +61,7 @@ export default function SimulatorPanel() {
         </div>
       )}
 
+      {/* Results */}
       {results && !loading && (
         <div className="fade-in">
           <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
@@ -67,7 +71,7 @@ export default function SimulatorPanel() {
 
           {/* Bar chart */}
           <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-            <h3 style={{ marginBottom: '1.2rem', fontSize: '1rem' }}>🏆 Championship Probability</h3>
+            <h3 style={{ marginBottom: '1.2rem', fontSize: '1rem', color: 'var(--text-secondary)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.8rem' }}>Championship Probability</h3>
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={chartData} margin={{ left: -10 }}>
                 <XAxis dataKey="team" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
@@ -84,29 +88,32 @@ export default function SimulatorPanel() {
             </ResponsiveContainer>
           </div>
 
-          {/* Team cards */}
+          {/* Team probability cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.75rem' }}>
             {Object.entries(results.championship_probabilities)
               .filter(([, p]) => p > 0)
               .map(([team, prob], i) => (
                 <div key={team} className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <span style={{ fontSize: '1.5rem', fontFamily: 'Bebas Neue', color: 'var(--text-muted)', width: 24, flexShrink: 0 }}>{i + 1}</span>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-muted)', width: 24, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}>{i + 1}</span>
                   <span style={{ fontSize: '1.6rem' }}>{getFlag(team)}</span>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{team}</div>
                     <div style={{ fontSize: '0.8rem', color: i === 0 ? 'var(--gold)' : 'var(--text-secondary)' }}>{pct(prob)} chance</div>
                   </div>
-                  {i === 0 && <span style={{ fontSize: '1.2rem' }}>🏆</span>}
+                  {i === 0 && <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--gold)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Favored</span>}
                 </div>
               ))}
           </div>
         </div>
       )}
 
+      {/* Empty state */}
       {!results && !loading && (
         <div style={{ textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎲</div>
-          <p style={{ fontSize: '1.1rem' }}>Click "Run Simulation" to calculate each team's championship probability using Monte Carlo simulation.</p>
+          <div style={{ width: 48, height: 48, border: '2px solid var(--border)', borderRadius: '50%', margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>?</span>
+          </div>
+          <p style={{ fontSize: '1.05rem' }}>Click "Run Simulation" to calculate each team's championship probability using Monte Carlo simulation.</p>
         </div>
       )}
     </div>

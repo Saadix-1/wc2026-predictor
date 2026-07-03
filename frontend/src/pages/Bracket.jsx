@@ -16,8 +16,8 @@ export default function BracketPage() {
   }, [])
 
   const tabs = [
-    { key: 'upcoming',  label: '🔮 Upcoming', count: bracket?.total_upcoming },
-    { key: 'completed', label: '✅ Completed', count: bracket?.total_completed },
+    { key: 'upcoming',  label: 'Upcoming', count: bracket?.total_upcoming },
+    { key: 'completed', label: 'Completed', count: bracket?.total_completed },
   ]
 
   return (
@@ -40,7 +40,7 @@ export default function BracketPage() {
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--green)' }}>{bracket.total_completed}</div>
             </div>
             <div style={{ marginLeft: 'auto' }}>
-              <span className="badge badge-gold">🏆 WC 2026 USA</span>
+              <span className="badge badge-gold">WC 2026 USA</span>
             </div>
           </div>
         )}
@@ -63,7 +63,7 @@ export default function BracketPage() {
 
         {error && (
           <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--red)' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--red)', marginBottom: '0.5rem' }}>Error</div>
             <p>{error}</p>
           </div>
         )}
