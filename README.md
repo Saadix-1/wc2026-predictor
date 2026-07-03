@@ -155,7 +155,7 @@ curl -X POST http://localhost:8000/api/predict \
 - **Training data**: 45,000+ international matches (2000–2026)
 - **Validation**: Time-series cross-validation (never leaks future data)
 - **Features**: Elo ratings, recent form (last 10 matches), head-to-head record, tournament stage, neutral venue
-- **Output**: 3-class probabilities (Home Win / Draw / Away Win)
+- **Output**: 3-class probabilities (Home Win / Draw / Away Win) 
 
 ---
 
