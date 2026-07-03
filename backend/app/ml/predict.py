@@ -55,6 +55,7 @@ def load_historical_data() -> pd.DataFrame:
     return df
 
 
+@lru_cache(maxsize=1024)
 def predict_match(
     team_a: str,
     team_b: str,

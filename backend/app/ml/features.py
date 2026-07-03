@@ -15,6 +15,10 @@ import numpy as np
 from app.ml.elo import EloRatingSystem
 
 
+_recent_form_cache = {}
+_h2h_cache = {}
+
+
 def compute_recent_form(
     df: pd.DataFrame,
     team: str,
@@ -25,6 +29,10 @@ def compute_recent_form(
     Computes a team's form over the last `n` matches before a given date.
     Returns wins, draws, losses, goals scored, goals conceded.
     """
+    key = (team, before_date, n)
+    if key in _recent_form_cache:
+        return _recent_form_cache[key]
+
     mask = (
         ((df["home_team"] == team) | (df["away_team"] == team))
         & (df["date"] < before_date)
@@ -51,7 +59,7 @@ def compute_recent_form(
             losses += 1
 
     n_played = len(recent)
-    return {
+    res = {
         "win_rate":        wins   / n_played if n_played else 0.5,
         "draw_rate":       draws  / n_played if n_played else 0.25,
         "loss_rate":       losses / n_played if n_played else 0.25,
@@ -60,6 +68,8 @@ def compute_recent_form(
         "goal_diff_avg":   (goals_for - goals_against) / n_played if n_played else 0.0,
         "matches_played":  n_played,
     }
+    _recent_form_cache[key] = res
+    return res
 
 
 def compute_h2h(
@@ -72,6 +82,26 @@ def compute_h2h(
     """
     Computes head-to-head record between two teams before a given date.
     """
+    sorted_teams = sorted([team_a, team_b])
+    key = (sorted_teams[0], sorted_teams[1], before_date, n)
+    if key in _h2h_cache:
+        # Resolve order to match a vs b (swap stats if needed)
+        cached = _h2h_cache[key]
+        if team_a == cached["team_a"]:
+            return {
+                "h2h_a_win_rate": cached["h2h_a_win_rate"],
+                "h2h_b_win_rate": cached["h2h_b_win_rate"],
+                "h2h_draw_rate":  cached["h2h_draw_rate"],
+                "h2h_matches":    cached["h2h_matches"],
+            }
+        else:
+            return {
+                "h2h_a_win_rate": cached["h2h_b_win_rate"],
+                "h2h_b_win_rate": cached["h2h_a_win_rate"],
+                "h2h_draw_rate":  cached["h2h_draw_rate"],
+                "h2h_matches":    cached["h2h_matches"],
+            }
+
     mask = (
         (
             ((df["home_team"] == team_a) & (df["away_team"] == team_b))
@@ -96,11 +126,22 @@ def compute_h2h(
             draws += 1
 
     n_played = len(h2h)
-    return {
+    res = {
+        "team_a": team_a,
+        "team_b": team_b,
         "h2h_a_win_rate":  a_wins / n_played if n_played else 0.33,
         "h2h_b_win_rate":  b_wins / n_played if n_played else 0.33,
         "h2h_draw_rate":   draws  / n_played if n_played else 0.33,
         "h2h_matches":     n_played,
+    }
+    _h2h_cache[key] = res
+    
+    # Return formatted result
+    return {
+        "h2h_a_win_rate": res["h2h_a_win_rate"],
+        "h2h_b_win_rate": res["h2h_b_win_rate"],
+        "h2h_draw_rate":  res["h2h_draw_rate"],
+        "h2h_matches":    res["h2h_matches"],
     }
 
 
