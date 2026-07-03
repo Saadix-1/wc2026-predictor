@@ -1,5 +1,5 @@
-# Dataset — download from Kaggle (see README) or run: python download_data.py
-data/results.csv
+# Dataset — committed for production inference (3.6MB)
+# data/results.csv  ← intentionally tracked
 data/goalscorers.csv
 data/shootouts.csv
 
