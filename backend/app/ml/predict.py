@@ -13,7 +13,7 @@ from functools import lru_cache
 from app.ml.elo import EloRatingSystem
 from app.ml.features import build_feature_row
 
-BASE_DIR   = Path(__file__).resolve().parents[3]
+BASE_DIR   = Path(__file__).resolve().parents[2]  # backend/app/ml/predict.py → backend/
 MODELS_DIR = BASE_DIR / "models"
 
 

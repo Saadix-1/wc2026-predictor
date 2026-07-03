@@ -19,8 +19,8 @@ ENV/
 .env
 *.env.local
 
-# ML model artifacts (too large for git — use git-lfs or regenerate)
-backend/models/*.pkl
+# ML model artifacts — committed so Railway can deploy without retraining
+# backend/models/*.pkl  (intentionally tracked)
 backend/models/*.joblib
 
 # Kaggle dataset (too large for git)
