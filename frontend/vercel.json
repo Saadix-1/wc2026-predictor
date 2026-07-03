@@ -1,15 +1,10 @@
 {
+  "name": "wc2026-predictor",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "framework": "vite",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "VITE_API_URL": {
-      "description": "URL of your deployed Railway backend",
-      "value": "https://your-app.up.railway.app"
-    }
-  }
+  ]
 }
