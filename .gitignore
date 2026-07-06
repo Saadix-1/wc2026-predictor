@@ -24,7 +24,7 @@ ENV/
 backend/models/*.joblib
 
 # Kaggle dataset (too large for git)
-backend/data/results.csv
+# backend/data/results.csv (intentionally tracked/uploaded for inference)
 backend/data/goalscorers.csv
 backend/data/shootouts.csv
 
