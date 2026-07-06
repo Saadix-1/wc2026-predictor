@@ -1,6 +1,6 @@
 # WC2026.AI — FIFA World Cup Prediction System
 
-> AI-powered match predictions for the 2026 FIFA World Cup. Machine learning meets the beautiful game.
+> AI-powered match predictions for the 2026 FIFA World Cup. Machine learning meets the beautiful game. 
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=flat-square&logo=vercel)](https://frontend-pi77fr3uj-saad-m.vercel.app)
 [![API](https://img.shields.io/badge/API-Railway-purple?style=flat-square&logo=railway)](https://wc2026-backend-production-c2b3.up.railway.app/docs)
