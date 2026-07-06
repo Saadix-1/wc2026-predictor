@@ -10,6 +10,8 @@ const FLAGS = {
   'Serbia': '🇷🇸', 'South Korea': '🇰🇷', 'Spain': '🇪🇸', 'Sweden': '🇸🇪',
   'Switzerland': '🇨🇭', 'Ukraine': '🇺🇦', 'Uruguay': '🇺🇾', 'USA': '🇺🇸',
   'United States': '🇺🇸',
+  'South Africa': '🇿🇦', 'Austria': '🇦🇹', 'Bosnia and Herzegovina': '🇧🇦',
+  'DR Congo': '🇨🇩', 'Cape Verde': '🇨🇻', 'Algeria': '🇩🇿', 'Ghana': '🇬🇭',
 }
 export const getFlag = (team) => FLAGS[team] || '🏳️'
 

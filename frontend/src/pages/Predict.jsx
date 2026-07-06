@@ -4,11 +4,11 @@ import { getFlag, pct, confidenceBadge } from '../utils/helpers'
 import AnalysisModal from '../components/AnalysisModal'
 
 const WC_TEAMS = [
-  'Argentina','Australia','Belgium','Brazil','Canada','Colombia','Croatia',
-  'Ecuador','Egypt','England','France','Germany','Hungary','Iran','Ivory Coast',
-  'Japan','Mexico','Morocco','Netherlands','New Zealand','Nigeria','Norway',
-  'Panama','Paraguay','Peru','Portugal','Saudi Arabia','Senegal','Serbia',
-  'South Korea','Spain','Sweden','Switzerland','Ukraine','Uruguay','USA',
+  'Algeria', 'Argentina', 'Australia', 'Austria', 'Belgium', 'Bosnia and Herzegovina',
+  'Brazil', 'Canada', 'Cape Verde', 'Colombia', 'Croatia', 'DR Congo', 'Ecuador',
+  'Egypt', 'England', 'France', 'Germany', 'Ghana', 'Ivory Coast', 'Japan',
+  'Mexico', 'Morocco', 'Netherlands', 'Norway', 'Paraguay', 'Portugal', 'Senegal',
+  'South Africa', 'Spain', 'Sweden', 'Switzerland', 'USA'
 ]
 
 const STAGES = ['Round of 32','Round of 16','Quarterfinal','Semifinal','Final']
