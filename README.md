@@ -6,7 +6,7 @@
 [![API](https://img.shields.io/badge/API-Railway-purple?style=flat-square&logo=railway)](https://wc2026-backend-production-c2b3.up.railway.app/docs)
 [![GitHub](https://img.shields.io/badge/GitHub-Saadix--1-181717?style=flat-square&logo=github)](https://github.com/Saadix-1/wc2026-predictor)
 
----
+--- 
 
 ## Live URLs 
 
