@@ -1,4 +1,4 @@
-# WC2026.AI — FIFA World Cup Prediction System
+# WC2026.AI — FIFA World Cup Prediction System 
 
 > AI-powered match predictions for the 2026 FIFA World Cup. Machine learning meets the beautiful game. 
 
