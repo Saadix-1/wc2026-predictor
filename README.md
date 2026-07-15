@@ -50,7 +50,7 @@
 | **Recharts** | Championship probability bar charts |
 | **Axios** | API communication |
 | **Vercel** | Frontend deployment |
-
+ 
 ---
 
 ## Architecture
