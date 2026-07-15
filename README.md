@@ -7,7 +7,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Saadix--1-181717?style=flat-square&logo=github)](https://github.com/Saadix-1/wc2026-predictor)
 
 --- 
-
+ 
 ## Live URLs 
 
 | Service | URL |
